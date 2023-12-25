@@ -33,7 +33,10 @@ jobs:
       env:
         GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
       run: |
+        git config --global user.name "githubAction"
+        git config --global user.email "action_bot@github.com."
         cd raw/FactoryBluePrints
         git remote add gitee https://gitee.com/erduotong/DSPBlueprints-FactoryBluePrints-Mirror.git
-        echo $GITEE_TOKEN | git credential approve
-        git push gitee HEAD:main
+        git add .
+        git commit -m "Update from GitHub Actions"
+        git push https://oauth2:${{ secrets.GITEE_TOKEN }}@gitee.com/erduotong/DSPBlueprints-FactoryBluePrints-Mirror.git
